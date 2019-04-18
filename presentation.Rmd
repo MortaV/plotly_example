@@ -1,0 +1,67 @@
+---
+title: "Plotly example"
+date: "18/04/2019"
+output: 
+    ioslides_presentation:
+        css: template.css
+---
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+library(tidyverse)
+library(plotly)
+
+colorr = "#C3453D"
+
+theme <- theme_minimal() +
+  theme(text = element_text(colour = "black", family = 'Montserrat'),
+        axis.text = element_text(size = rel(0.8), 
+                                 vjust = 0.5,
+                                 hjust = 0.5),
+        plot.title = element_text(size = rel(1.5), 
+                                  vjust = 0.5,
+                                  hjust = 0.5,
+                                  face = "bold",
+                                  color = colorr),
+        strip.text = element_text(size = rel(0.8), 
+                                  vjust = 0.5,
+                                  hjust = 0.5),
+        legend.position = "bottom",
+        legend.justification = "center")
+
+data("iris")
+
+```
+
+## What will you find in here?
+
+In this presentation I will make two graphs - one directly with plotly and the other - with ggplot and plotly.
+
+The data used in here is the famous iris dataset.
+
+## Plot with plotly
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+plot_ly(iris, 
+        x = ~Petal.Length, 
+        y = ~Petal.Width, 
+        color = ~Species, 
+        type = "scatter")
+```
+
+## Plot with ggplot + plotly
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+p <- iris %>%
+    ggplot(aes(x = Petal.Length,
+               y = Petal.Width,
+               color = Species)) +
+        geom_point() +
+        labs(title = "Iris Species",
+             x = "Sepal length",
+             y = "Sepal width") +
+        theme +
+        scale_color_manual(values = c('#E28580', colorr, "black"))
+
+ggplotly(p)
+```

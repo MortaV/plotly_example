@@ -1,0 +1,50 @@
+---
+title: "Countries I have visited and plan to visit"
+date: "18/04/2019"
+output: 
+  html_document:
+    css: template.css
+    
+---
+
+```{r warning = FALSE, message = FALSE}
+library(tidyverse)
+library(knitr)
+library(extrafont)
+library(leaflet)
+library(readxl)
+library(htmltools)
+
+data <- read_xlsx('travel.xlsx', 2)
+
+```
+
+## R Markdown
+
+In this project I decided to make a map with all the countries in Europe I have already visited and the ones I am planning to visit this year.
+
+```{r message=FALSE, warning=FALSE}
+
+data <- data %>%
+    mutate(labels = name)
+
+TravelIcons <- iconList(visited = makeIcon("check.png", iconWidth = 24, iconHeight = 24),
+                       planning = makeIcon("plane.png", iconWidth = 24, iconHeight = 24))
+
+html_legend <- "<div style='padding: 5px; padding-bottom: 5px;'><h4 style='padding-top:0; padding-bottom:10px; margin: 0;'> Legend </h4><img style='position: relative; display: inline-block; width: 24px; height: 24px' src='check.png'>Visited<br/><img style='position: relative; display: inline-block; width: 24px; height: 24px' src='plane.png'>Planning"
+
+leaflet(data) %>% 
+    addTiles() %>%
+    addMarkers(icon = ~TravelIcons[group], 
+               label = ~htmlEscape(labels),
+               labelOptions = labelOptions(noHide = F, direction = "top",
+                                           style = list(
+                                               "color" = "black",
+                                               "font-family" = "Montserrat",
+                                               "font-weight" = "bold",
+                                               "font-size" = "12px",
+                                               "border-color" = "black"
+                                           ))) %>%
+  addControl(html = html_legend, position = "topright")
+
+```

@@ -1,0 +1,34 @@
+body {
+  color: rgb(0,0,0);
+  font-size: 13px;
+  font-family: "Montserrat";
+}
+
+.title-slide hgroup h1 {
+  color: rgb(195,69,61);
+  font-family: "Montserrat";
+}
+
+h1 {
+  color: rgb(195,69,61);
+  font-size: 20px;
+  font-family: "Montserrat";
+}
+
+h2 {
+  color: rgb(195,69,61);
+  font-size: 18px;
+  font-family: "Montserrat";
+}
+
+h3 {
+  color: rgb(195,69,61);
+  font-size: 16px;
+  font-family: "Montserrat";
+}
+
+h4 {
+  color: rgb(195,69,61);
+  font-size: 16px;
+  font-family: "Montserrat";
+}
