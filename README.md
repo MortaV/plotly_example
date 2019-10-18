@@ -1,4 +1,4 @@
-# plotly_example
+# Plotly example
 
 ## Purpose of the project
 
